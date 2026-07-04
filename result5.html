@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>增力科技有限公司 - 企业通查询</title>
+    <style>
+        /* 模拟企业征信APP的经典蓝白/灰底风格 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f5f6f8;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        /* 顶部模拟导航栏 */
+        .app-header {
+            background-color: #1a73e8;
+            color: #ffffff;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            font-size: 20px;
+            color: #ffffff;
+            text-decoration: none;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .app-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* 主体内容包裹 */
+        .content-scroller {
+            padding: 12px;
+        }
+
+        /* 企业核心头图卡片 */
+        .company-main-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .company-name {
+            font-size: 19px;
+            font-weight: bold;
+            color: #111111;
+            margin: 0 0 8px 0;
+        }
+        .status-badge {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #fff7e6;
+            color: #fa8c16;
+            border: 1px solid #ffd591;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        /* 核心高管/资本四宫格表格 */
+        .grid-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            border-top: 1px solid #eee;
+            padding-top: 12px;
+        }
+        .grid-item {
+            font-size: 13px;
+        }
+        .grid-label {
+            color: #8c8c8c;
+            margin-bottom: 2px;
+        }
+        .grid-value {
+            color: #262626;
+            font-weight: 500;
+        }
+        .boss-name {
+            color: #1a73e8;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* 模块通用卡片 */
+        .section-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #1f1f1f;
+            margin-top: 0;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 基础表格样式 */
+        .kv-table {
+            width: 100%;
+            font-size: 13px;
+            border-collapse: collapse;
+        }
+        .kv-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+        .kv-table td:first-child {
+            color: #8c8c8c;
+            width: 85px;
+        }
+        .kv-table td:last-child {
+            color: #262626;
+        }
+
+        /* ==== 核心：高风险提示与红字列表 ==== */
+        .risk-header-count {
+            background-color: #ffccc7;
+            color: #ff4d4f;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .risk-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .risk-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+        .risk-item:last-child {
+            border-bottom: none;
+        }
+        .risk-tag-high {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #fff1f0;
+            color: #f5222d;
+            border: 1px solid #ffa39e;
+            padding: 0 4px;
+            border-radius: 3px;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        .risk-tag-warning {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #fffbe6;
+            color: #d46b08;
+            border: 1px solid #ffe58f;
+            padding: 0 4px;
+            border-radius: 3px;
+            margin-right: 6px;
+            font-weight: bold;
+        }
+        .risk-meta {
+            font-size: 12px;
+            color: #8c8c8c;
+            margin-top: 4px;
+        }
+        
+        /* 线索下划线强调，保持黑色 */
+        .hint-line {
+            text-decoration: underline;
+            text-decoration-color: #262626;
+            text-underline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部模拟企业查导航 -->
+    <div class="app-header">
+        <a href="javascript:history.back();" class="back-btn">←</a>
+        <div class="app-title">企业通 · 触达真实商业征信</div>
+    </div>
+
+    <!-- 主体可滚动区域 -->
+    <div class="content-scroller">
+
+        <!-- 1. 企业基本头图 -->
+        <div class="company-main-card">
+            <h1 class="company-name">增力科技有限公司</h1>
+            <span class="status-badge">存续（经营异常、高风险警告）</span>
+            
+            <div class="grid-info">
+                <div class="grid-item">
+                    <div class="grid-label">法定代表人</div>
+                    <div class="grid-value"><a href="result9.html" class="boss-name">张卫国</a></div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-label">注册资本</div>
+                    <div class="grid-value">100.00 万人民币</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-label">成立日期</div>
+                    <div class="grid-value">2021-03-15</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-label">人员规模</div>
+                    <div class="grid-value"><span class="hint-line">40人（微小型企业）</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 工商登记详情 -->
+        <div class="section-card">
+            <h2 class="section-title">基本工商信息</h2>
+            <table class="kv-table">
+                <tr>
+                    <td>统一代码</td>
+                    <td>91110108MA027XRT4G</td>
+                </tr>
+                <tr>
+                    <td>企业类型</td>
+                    <td>有限责任公司(自然人独资)</td>
+                </tr>
+                <tr>
+                    <td>经营地址</td>
+                    <td>工业园区科技路小微企业创新孵化基地B栋302室</td>
+                </tr>
+                <tr>
+                    <td>经营范围</td>
+                    <td>计算机软硬件技术开发；<span class="hint-line">工业自动化传动结构机械臂轴承及配套配件零售</span>；机械设备租赁；网络系统集成服务。</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 3. 核心：风险信息模块（包含大量高危信息） -->
+        <div class="section-card" style="border: 1px solid #ffa39e;">
+            <h2 class="section-title" style="color: #f5222d;">
+                风险信息 <span class="risk-header-count">共 6 条高危预警</span>
+            </h2>
+            
+            <ul class="risk-list">
+                <!-- 风险 1 -->
+                <li class="risk-item">
+                    <div>
+                        <span class="risk-tag-high">严重高危</span>
+                        <strong style="color: #111;">列入失信被执行人（老赖）名单</strong>
+                    </div>
+                    <div class="risk-meta">
+                        案号：(2026)执字第8840号 ｜ 执行法院：当地人民法院<br>
+                        执行依据文书：由于<span class="hint-line">拒不支付40名员工的拖欠工资及劳动遣散补偿款</span>，涉及金额累计达42.5万元，企业法人代表张卫国已被限制高消费。
+                    </div>
+                </li>
+
+                <!-- 风险 2 -->
+                <li class="risk-item">
+                    <div>
+                        <span class="risk-tag-high">严重高危</span>
+                        <strong style="color: #111;">列入经营异常名录</strong>
+                    </div>
+                    <div class="risk-meta">
+                        作出决定机关：市场监督管理局 ｜ 日期：2026-04-10<br>
+                        原因：<span class="hint-line">通过登记的住所或者经营场所无法与该企业取得联系</span>，疑为资金链断裂后全员闭店失联。
+                    </div>
+                </li>
+
+                <!-- 风险 3 -->
+                <li class="risk-item">
+                    <div>
+                        <span class="risk-tag-warning">警示</span>
+                        <strong style="color: #111;">法律诉讼：买卖合同纠纷被告</strong>
+                    </div>
+                    <div class="risk-meta">
+                        案号：(2025)民初字第1102号 ｜ 原告：精工自动化配件厂<br>
+                        诉由：增力科技有限公司作为订货方，因<span class="hint-line">违约拖欠对方精密五金构件尾款18.6万元</span>至今未还，导致原告提起诉讼。
+                    </div>
+                </li>
+
+                <!-- 风险 4 -->
+                <li class="risk-item">
+                    <div>
+                        <span class="risk-tag-warning">警示</span>
+                        <strong style="color: #111;">行政处罚记录</strong>
+                    </div>
+                    <div class="risk-meta">
+                        处罚文号：劳监罚字〔2025〕047号 ｜ 处罚金额：2.00 万元<br>
+                        事由：该企业在2025下半年期间，存在<u>强行扣留40名在职研发及销售人员数字通讯设备、超长超时加班且未依法发放加班费</u>的违规行为。
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

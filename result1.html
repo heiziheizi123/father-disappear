@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>搜索结果</title>
+    <style>
+        /* 全局样式：模拟手机端浏览器搜索结果页 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        /* 顶部模拟搜索栏 */
+        .header-bar {
+            background-color: #fff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-icon {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+        .dummy-search-box {
+            flex: 1;
+            background-color: #f1f3f4;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* 结果列表容器 */
+        .results-container {
+            padding: 12px;
+        }
+
+        /* 基础搜索卡片样式 */
+        .result-item {
+            position: relative; /* 方便右上角标签定位 */
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            user-select: none; 
+        }
+
+        /* ==== 核心：第一条【曾浏览过】的特殊交互样式 ==== */
+        .result-item.visited-track {
+            background-color: #eef2f9; /* 颜色比正常结果深 */
+            border-left: 4px solid #1a73e8; 
+            cursor: pointer;
+            user-select: auto;
+            transition: background-color 0.2s;
+        }
+        .result-item.visited-track:active {
+            background-color: #e2e9f5; 
+        }
+
+        /* 右上角直观的“曾浏览过”标签 */
+        .top-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #334155; /* 深色显眼标签 */
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 标题党风格样式 */
+        .title-clickbaity {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a0dab; 
+            line-height: 1.4;
+            margin: 0 0 6px 0;
+            padding-right: 65px; /* 防止标题文本和右上角标签重叠 */
+        }
+        .visited-track .title-clickbaity {
+            color: #0b1a75;
+        }
+
+        /* 摘要文字 */
+        .snippet {
+            font-size: 13px;
+            color: #4f4f4f;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 底部来源信息 */
+        .meta-info {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* 纯静态干扰项的暗淡样式 */
+        .distractor {
+            opacity: 0.85;
+        }
+        .distractor .title-clickbaity {
+            color: #333 !important; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部模拟浏览器搜索栏 -->
+    <div class="header-bar">
+        <a href="浏览器.html" class="back-icon">←</a>
+        <div class="dummy-search-box">完全忘记一个人是怎么回事？</div>
+    </div>
+
+    <!-- 搜索结果列表 -->
+    <div class="results-container">
+
+        <!-- 【第一条：曾浏览过，唯一可互动项】 -->
+        <div class="result-item visited-track" id="interactiveResult">
+            <!-- 右上角显眼标签 -->
+            <span class="top-badge">曾浏览过</span>
+            
+            <h2 class="title-clickbaity">
+                细思极恐！大脑开始“格式化”？科学研究表明：完全忘记一个人，其实是这个惊人原因……
+            </h2>
+            <div class="snippet">
+                “忽然失去对一个人的记忆”在医学和心理学上分两种截然不同的情况，表现天差地别。请对照以下特征，先分清是“大脑生病”还是“心理受伤”：
+            </div>
+            <div class="meta-info">
+                 1457次观点 · 一个月前
+            </div>
+        </div>
+
+        <!-- 【以下全是干扰项，无法点击】 -->
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">一个人要花多久？心理学上的“21天无痕断联法”真的有用吗？</h2>
+            <div class="snippet">
+                很多人以为不联系就能忘记，其实真正让你无法释怀的是执念。情感专家表示，想要清除一段记忆，通常需要经历三个心理周期，分别是以及最后的……
+            </div>
+            <div class="meta-info">热门问答 · 145次赞同</div>
+        </div>
+
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">【情感树洞】有没有一个瞬间，你发现自己把最爱的那个人彻底忘干净了？</h2>
+            <div class="snippet">
+                网友热议爆贴：今天整理旧物，翻出了一张合影，照片里我笑得很开心，可我盯着旁边的那个男人看了足足十分钟，我竟然一点也记不起他是谁，这究竟是一种什么心理病症？
+            </div>
+            <div class="meta-info">社区论坛 · 23条讨论</div>
+        </div>
+
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">记忆消退假说：选择性遗忘与大脑海马体受损的必然联系</h2>
+            <div class="snippet">
+                医学文献指出，人体在遭遇创伤后应激（PTSD）或特异性认知阻断时，神经元突触会发生。这种物理层面上的遗忘，会导致局部相关人物链条的永久性丢失……
+            </div>
+            <div class="meta-info">健康百科 · 34条权威解读</div>
+        </div>
+
+    </div>
+
+    <script>
+// 点击第一条可互动项的事件
+document.getElementById('interactiveResult').addEventListener('click', function() {
+    // 将这里的 'your_target_page.html' 替换你想让它跳转到的具体网页文件名
+    window.location.href = 'your_target_page.html'; 
+});
+</script>
+</body>
+</html>

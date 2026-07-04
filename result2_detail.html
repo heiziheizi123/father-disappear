@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>实用指南：失联人员寻觅与社会公开线索排查</title>
+    <style>
+        /* 全局现代文献/文章页风格样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f6f8fa;
+            margin: 0;
+            padding: 0;
+            color: #24292f;
+            line-height: 1.7;
+        }
+
+        /* 顶部返回导航 */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #d0d7de;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            font-size: 20px;
+            color: #57606a;
+            text-decoration: none;
+            margin-right: 14px;
+            cursor: pointer;
+        }
+        .nav-title {
+            font-size: 14px;
+            color: #57606a;
+            font-weight: 500;
+        }
+
+        /* 页面主容器 */
+        .main-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 20px 16px 40px 16px;
+        }
+
+        /* 文章卡片主体 */
+        .document-card {
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 24px 20px;
+            box-shadow: 0 2px 8px rgba(140, 148, 159, 0.08);
+        }
+
+        /* 标题与元数据 */
+        .doc-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2328;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+        .doc-meta {
+            font-size: 12px;
+            color: #57606a;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* 引导段落框 */
+        .intro-box {
+            background-color: #f6f8fa;
+            border-left: 4px solid #57606a;
+            padding: 14px 16px;
+            margin: 16px 0 24px 0;
+            font-size: 14px;
+            color: #24292f;
+            border-radius: 0 6px 6px 0;
+            text-align: justify;
+        }
+
+        /* 章节大标题 */
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a73e8;
+            margin: 28px 0 12px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #d0d7de;
+        }
+
+        /* 细节列表排版 */
+        .info-list {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+        .info-list li {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #24292f;
+            text-align: justify;
+        }
+        .info-list strong {
+            color: #1f2328;
+        }
+
+        /* 核心要求：最重要的部分采用黑色下划线，不改变文字本身的颜色 */
+        .important-line {
+            text-decoration: underline;
+            text-decoration-color: #24292f;
+            text-underline-offset: 3px;
+        }
+
+        /* 手机端间距优化 */
+        @media (max-width: 480px) {
+            .document-card { padding: 18px 14px; }
+            .doc-title { font-size: 19px; }
+            .section-title { font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部返回导航栏 -->
+    <div class="nav-header">
+        <a href="result2.html" class="back-btn">←</a>
+        <div class="nav-title">科普专栏 > 社会工程与公开情报技巧</div>
+    </div>
+
+    <!-- 核心页面容器 -->
+    <div class="main-container">
+        <div class="document-card">
+            
+            <!-- 标题组 -->
+            <h1 class="doc-title">人海茫茫如何寻人？一份由易到难的失联线索排查与追踪指南</h1>
+            <div class="doc-meta">
+                文献分类：公开情报搜集 (OSINT) ｜ 浏览热度：8万+ ｜ 发布日期：2026-06-23
+            </div>
+
+            <!-- 引入段落 -->
+            <div class="intro-box">
+                想联系上许久未见的人，可以按照下面这条由易到难的路径来尝试。在寻找过程中，请注意保护他人隐私，保持理性和合规，将搜集到的零散记忆作为线索逐步拼接：
+            </div>
+
+            <!-- 1. 社交平台与公开信息搜索 -->
+            <div class="section-title">1. 社交平台与公开信息搜索</div>
+            <p style="font-size: 14px; margin: 0 0 8px 0;">这是最高效、最常用的基础检索方法：</p>
+            <ul class="info-list">
+                <li>
+                    <strong>多平台交叉搜索：</strong><span class="important-line">在微信、QQ、微博、抖音、LinkedIn 等平台，输入朋友的姓名、昵称、可能的手机号/QQ号进行查找</span>。很多人在不同平台会沿用相同的头像、个性签名或ID。
+                </li>
+                <li>
+                    <strong>搜索引擎高级语法：</strong>尝试在传统网页搜索引擎中使用双引号进行精确匹配，例如输入 <span class="important-line">"姓名" + "母校名称"</span> 或 <span class="important-line">"姓名" + "曾工作过的城市"</span>，能够快速筛选出相关的公开公示、行业通报或校友名录。
+                </li>
+            </ul>
+
+            <!-- 2. 挖掘“共同圈子”与人际网络代偿 -->
+            <div class="section-title">2. 挖掘“共同圈子”与人际网络代偿</div>
+            <ul class="info-list">
+                <li>
+                    <strong>知情人顺藤摸瓜：</strong>如果直接联系方式失效，寻找你们共同相识的第三方（如老班长、共同的前同事、旧邻居）往往能起到关键桥梁作用。<span class="important-line">通过打听“他当年跟谁关系最好”，往往能从别人的好友列表里找到突破口</span>。
+                </li>
+                <li>
+                    <strong>地缘与亲属线索：</strong>如果记得对方的老家地址或父母的职业背景，可以尝试联系当地的社区服务中心或寻找公开的商户登记信息进行侧面求证。
+                </li>
+            </ul>
+
+            <!-- 3. 数字碎片与历史痕迹重组 -->
+            <div class="section-title">3. 数字碎片与历史痕迹重组</div>
+            <ul class="info-list">
+                <li>
+                    <strong>历史互动信息留存：</strong>翻找旧手机的短信收发记录、电子邮箱的历史往来信件、甚至是很早以前的物理同学录。<span class="important-line">很多时候，由于没有刻意保存，最关键的旧联系方式（如弃用的网名、曾用邮箱）往往藏在被遗忘的角落里</span>。
+                </li>
+                <li>
+                    <strong>特长与作品检索：</strong>如果对方曾有某些特定特长（如发表过文章、参加过某些公开赛事或在网络社区十分活跃），<span class="important-line">在专门的学术期刊网、垂直技术论坛或艺术类社区检索其署名作品</span>，往往能找到他最新留下的动态与联系渠道。
+                </li>
+            </ul>
+
+            <!-- 4. 终极路径：合规求助与公益介入 -->
+            <div class="section-title">4. 终极路径：合规求助与公益介入</div>
+            <ul class="info-list">
+                <li>
+                    若涉及特殊突发变故（如多年失散、涉嫌违法侵权或人身安全受威胁），<span class="important-line">请立刻携带亲属证明、关键线索等证据前往公安机关申请协助协助调查</span>，或者向正规、合法的公益寻亲组织提交线索登记，切勿盲目相信网络上的付费私家侦探。
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+</html>

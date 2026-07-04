@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>添加朋友</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ededed;
+            color: #111111;
+            user-select: none;
+        }
+
+        /* 微信顶栏 */
+        .nav-bar {
+            height: 48px;
+            background-color: #ededed;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111111;
+            font-size: 16px;
+        }
+
+        /* 微信标准的返回箭头 */
+        .back-btn::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #111111;
+            border-bottom: 2px solid #111111;
+            transform: rotate(45deg);
+            margin-right: 6px;
+        }
+
+        .nav-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        /* 搜索外层包裹 */
+        .search-container {
+            background-color: #ffffff;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 搜索框内嵌区域 */
+        .search-box {
+            background-color: #f7f7f7;
+            flex: 1;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+        }
+
+        /* 微信绿搜索图标 */
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-icon svg {
+            fill: #57be6a; /* 微信绿 */
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            color: #111111;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #b2b2b2;
+        }
+
+        /* 我的微信号区域 */
+        .my-account {
+            text-align: center;
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-top: 12px;
+        }
+        
+        .my-account span {
+            color: #576b95; /* 微信蓝/链接色 */
+            margin-left: 5px;
+        }
+
+        /* 联想搜索结果栏 */
+        .search-result-panel {
+            display: none;
+            background-color: #ffffff;
+            margin-top: 10px;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            cursor: pointer;
+        }
+
+        .result-item:active {
+            background-color: #e5e5e5;
+        }
+
+        .result-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #57be6a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        .result-icon svg {
+            fill: #ffffff;
+            width: 24px;
+            height: 24px;
+        }
+
+        .result-text {
+            font-size: 16px;
+        }
+
+        .result-text span {
+            color: #57be6a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a class="back-btn" href="微信.html">微信</a>
+        <div class="nav-title">添加朋友</div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-box">
+            <div class="search-icon">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </div>
+            <input type="text" id="searchInput" class="search-input" placeholder="微信号/手机号" autocomplete="off">
+        </div>
+    </div>
+
+    <div class="my-account">我的微信号: <span>wxid_search_demo</span></div>
+
+    <div id="resultPanel" class="search-result-panel">
+        <div class="result-item" id="searchTrigger">
+            <div class="result-icon">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            </div>
+            <div class="result-text">搜索: <span id="searchText"></span></div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const resultPanel = document.getElementById('resultPanel');
+        const searchText = document.getElementById('searchText');
+        const searchTrigger = document.getElementById('searchTrigger');
+
+        // 监听输入，显示“搜索：xxxx”
+        searchInput.addEventListener('input', function() {
+            const val = this.value.trim();
+            if (val.length > 0) {
+                searchText.textContent = val;
+                resultPanel.style.display = 'block';
+            } else {
+                resultPanel.style.display = 'none';
+            }
+        });
+
+        // 点击搜索：验证正确性，直接跳转，这里不存储数据
+        searchTrigger.addEventListener('click', function() {
+            const targetId = searchInput.value.trim();
+            
+            if (targetId === 'wxid_wg99812') {
+                // 直接去个人详细资料页
+                window.location.href = 'weiguo.html';
+            } else {
+                alert('用户不存在，请检查微信号是否正确');
+            }
+        });
+    </script>
+</body>
+</html>

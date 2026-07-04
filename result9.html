@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>张卫国 - 搜搜百科</title>
+    <style>
+        /* 全局移动端百科/多义词聚合页风格 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f6f7f9;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        /* 顶部模拟浏览器搜索栏 */
+        .header-bar {
+            background-color: #fff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-icon {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+        .dummy-search-box {
+            flex: 1;
+            background-color: #f1f3f4;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* 主体内容容器 */
+        .main-container {
+            padding: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 顶部多义词头图卡片 */
+        .polysemy-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .main-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #111111;
+            margin: 0 0 6px 0;
+        }
+        .polysemy-tip {
+            font-size: 13px;
+            color: #666666;
+            background-color: #f0f2f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border-left: 3px solid #909399;
+        }
+
+        /* 身份拆分项卡片 */
+        .identity-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid #eef0f2;
+        }
+
+        .identity-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .identity-tag {
+            font-size: 11px;
+            background-color: #e8f4ff;
+            color: #1890ff;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .identity-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111111;
+        }
+
+        .identity-desc {
+            font-size: 13px;
+            color: #555555;
+            text-align: justify;
+            margin: 0;
+        }
+
+        /* 核心陷阱要素划线，误导玩家进行深度思考 */
+        .trap-line {
+            text-decoration: underline;
+            text-decoration-color: #444444;
+            text-underline-offset: 3px;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: #999999;
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部模拟浏览器搜索栏 -->
+    <div class="header-bar">
+        <a href="浏览器.html" class="back-icon">←</a>
+        <div class="dummy-search-box">张卫国</div>
+    </div>
+
+    <!-- 主体容器 -->
+    <div class="main-container">
+
+        <!-- 多义词头图提示 -->
+        <div class="polysemy-card">
+            <h1 class="main-title">张卫国</h1>
+            <div class="polysemy-tip">
+                <strong>这是一个多义词：</strong>在中国境内，共有高达 23,415 个名为“张卫国”的公民注册记录。以下为您罗列各行业具有代表性的公开社会人物资料。
+            </div>
+        </div>
+
+        <!-- 干扰项 1：医疗界 -->
+        <div class="identity-item">
+            <div class="identity-header">
+                <span class="identity-tag">医疗卫生</span>
+                <span class="identity-name">张卫国（主任医师）</span>
+            </div>
+            <p class="identity-desc">
+                曾任省中医院针灸科副主任，现任学术委员会名誉顾问。从事中医临床针灸及神经内科代偿机制研究四十余年。<span class="trap-line">擅长通过外部物理微弱电流刺激，辅助改善中老年应激性突发失忆、脑梗塞后遗症以及小范围轻度器质性遗忘</span>，曾在核心期刊发表学术论文三十余篇。
+            </p>
+        </div>
+
+        <!-- 干扰项 2：学术界 -->
+        <div class="identity-item">
+            <div class="identity-header">
+                <span class="identity-tag">高等教育</span>
+                <span class="identity-name">张卫国（材料科学教授）</span>
+            </div>
+            <p class="identity-desc">
+                北方工业大学机械工程与自动化学院博导，精密制造重点实验室核心常务理事。长期致力于高精密高强度钛合金耐磨镀层与<span class="trap-line">增力结构传动装置的承载极限推演</span>。其带队研发的自动化高承载机械臂轴承，已广泛应用于重工业制造流水线。
+            </p>
+        </div>
+
+        <!-- 干扰项 3：基层劳模 -->
+        <div class="identity-item">
+            <div class="identity-header">
+                <span class="identity-tag">社会荣誉</span>
+                <span class="identity-name">张卫国（一线铁路巡检员）</span>
+            </div>
+            <p class="identity-desc">
+                西北铁路局某道班优秀共产党员、五一劳动奖章获得者。在平均海拔3100米的荒漠无人区铁路线上，孤身坚守岗位二十七年，<span class="trap-line">行程累计数万公里，无一例人工巡检巡视差错</span>。被当地群众亲切地誉为“大漠铁轨的移动活地图”。
+            </p>
+        </div>
+
+        <!-- 干扰项 4：文艺界 -->
+        <div class="identity-item">
+            <div class="identity-header">
+                <span class="identity-tag">文化艺术</span>
+                <span class="identity-name">张卫国（当代青年先锋画家）</span>
+            </div>
+            <p class="identity-desc">
+                毕业于中央美术学院油画系，现为自由签约艺术家。其作品风格带有强烈的解构主义色彩，擅长运用大面积的昏暗色调与孤立的纯白几何色块，表现当代都市人群的群体性孤独。<span class="trap-line">代表画作《孤岛的黄昏》、《失落的提线木偶》</span>曾多次入选国际青年艺术联展。
+            </p>
+        </div>
+
+        <!-- 底部版权提示，加强拟真感 -->
+        <div class="footer-note">
+            基于公开大数据聚合生成 ｜ 搜搜百科 ｜ 2026
+        </div>
+
+    </div>
+
+</body>
+</html>

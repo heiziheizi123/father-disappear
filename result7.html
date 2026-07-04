@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>全国法院失信被执行人名单信息公布与查询平台</title>
+    <style>
+        /* 还原官方政务网站的严肃、生硬、红白黑配色风格 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Helvetica, Arial, sans-serif;
+            background-color: #f7f8fa;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+
+        /* 官方红头标题栏 */
+        .gov-header {
+            background-color: #c00000; /* 政务红 */
+            color: #ffffff;
+            padding: 14px 15px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .back-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 20px;
+            margin-right: 12px;
+        }
+        .gov-title {
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            padding: 12px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 警示公告横幅 */
+        .alert-banner {
+            background-color: #fff1f0;
+            border: 1px solid #ffa39e;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #cf1322;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        /* 惩戒决定书卡片 */
+        .case-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border-top: 4px solid #c00000;
+        }
+
+        .case-badge {
+            display: inline-block;
+            font-size: 11px;
+            background-color: #fbdee1;
+            color: #c00000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .case-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #111111;
+            margin: 0 0 15px 0;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 10px;
+        }
+
+        /* 司法表格样式 */
+        .gov-table {
+            width: 100%;
+            font-size: 13px;
+            border-collapse: collapse;
+        }
+        .gov-table td {
+            padding: 9px 6px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        .gov-table td.label {
+            color: #666666;
+            width: 110px;
+            background-color: #fafafa;
+            font-weight: 500;
+            padding-left: 8px;
+        }
+        .gov-table td.value {
+            color: #111111;
+            padding-left: 12px;
+        }
+
+        /* 终结部分强调 */
+        .highlight-text {
+            color: #c00000;
+            font-weight: bold;
+        }
+
+        .gov-footer {
+            text-align: center;
+            font-size: 11px;
+            color: #999999;
+            margin-top: 25px;
+            padding-bottom: 20px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部政务红头栏 -->
+    <div class="gov-header">
+        <a href="javascript:history.back();" class="back-link">←</a>
+        <div class="gov-title">最高人民法院限制消费令执行公开综合综合服务平台</div>
+    </div>
+
+    <div class="main-container">
+
+        <!-- 官方合规警示 -->
+        <div class="alert-banner">
+            <strong>核心提示：</strong>本系统公布的数据均与司法执行管理系统即时联动。被执行人未履行生效法律文书确定的义务，已被依法限制高消费及非生活必需的消费行为。
+        </div>
+
+        <!-- 被执行人核心档案卡片 -->
+        <div class="case-card">
+            <span class="case-badge">最高人民法院失信惩戒对象（已核验）</span>
+            <h2 class="case-title">限制消费令及失信被执行人公开信息明细</h2>
+
+            <table class="gov-table">
+                <tr>
+                    <td class="label">被执行人姓名</td>
+                    <td class="value" style="font-weight: bold;">张卫国</td>
+                </tr>
+                <tr>
+                    <td class="label">身份证号码/组织机构代码</td>
+                    <td class="value">3702831975******12 （已脱敏）</td>
+                </tr>
+                <tr>
+                    <td class="label">关联企业名称</td>
+                    <td class="value">增力科技有限公司</td>
+                </tr>
+                <tr>
+                    <td class="label">担任职务</td>
+                    <td class="value">法定代表人 / 执行董事兼总经理</td>
+                </tr>
+                <tr>
+                    <td class="label">执行法院</td>
+                    <td class="value">直水县人民法院第一执行裁决庭</td>
+                </tr>
+                <tr>
+                    <td class="label">立案时间</td>
+                    <td class="value">2026年03月02日</td>
+                </tr>
+                <tr>
+                    <td class="label">执行案号</td>
+                    <td class="value" style="font-family: monospace; font-size: 14px; font-weight: bold; color: #111;">(2026)执字第8840号</td>
+                </tr>
+                <tr>
+                    <td class="label">执行依据文书</td>
+                    <td class="value">(2025)直水民初字第0914号劳动争议民事判决书</td>
+                </tr>
+                <tr>
+                    <td class="label">生效法律文书确定的义务</td>
+                    <td class="value">
+                        责令被告增力科技有限公司及法代张卫国于判决生效后十日内，全额支付拖欠职工的劳动报酬及遣散补偿款，涉案总金额共计<span class="highlight-text">425,000元</span>。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">被执行人履行情况</td>
+                    <td class="value"><span class="highlight-text">全部未履行</span>（属于有履行能力而拒不履行生效法律文书确定义务）</td>
+                </tr>
+                <tr>
+                    <td class="label">失信被执行人具体行为情形</td>
+                    <td class="value">
+                        违反限制消费令；在案件执行期间，无故规避法院传唤，<span class="highlight-text">拒绝公开企业实际资产明细</span>，并在办公场所无法与其取得联系。
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">已采取的惩戒措施</td>
+                    <td class="value">
+                        1. 限制法代张卫国高消费及非生活与工作必需的消费行为；<br>
+                        2. 依法冻结关联企业增力科技有限公司名下所有的银行结算账户；<br>
+                        3. 依法将其信息录入全国法院失信被执行人名单库，向社会公开。
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 底部政务版权 -->
+        <div class="gov-footer">
+            中华人民共和国最高人民法院 监制<br>
+            直水县人民法院执行局 技术支持 ｜ 数据更新于：2026-06-23
+        </div>
+
+    </div>
+
+</body>
+</html>

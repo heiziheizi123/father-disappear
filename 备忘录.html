@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>备忘录</title>
+    <style>
+        :root {
+            --apple-yellow: #e4af0a;
+            --apple-bg: #f2f2f7;
+            --card-bg: #ffffff;
+            --text-main: #000000;
+            --text-muted: #8e8e93;
+            --border-color: #e5e5ea;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--apple-bg);
+            color: var(--text-main);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        /* 模拟手机屏幕容器 */
+        .phone-container {
+            width: 100%;
+            max-width: 414px;
+            background-color: var(--apple-bg);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 8px solid #333;
+            min-height: 800px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部导航栏 */
+        .nav-bar {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--apple-bg);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .back-btn {
+            color: var(--apple-yellow);
+            text-decoration: none;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .back-btn::before {
+            content: "〈";
+            margin-right: 5px;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            color: var(--apple-yellow);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* 备忘录主包裹器 */
+        .notes-wrapper {
+            padding: 0 16px 40px 16px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* 单个备忘录卡片 */
+        .note-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .note-date {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .note-content {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        /* 标题样式 */
+        .note-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        /* 分隔线 */
+        .divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 12px 0;
+        }
+
+        /* 图片与提示样式 */
+        .image-container {
+            margin: 16px 0;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .note-img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 6px;
+            display: block;
+            margin-bottom: 8px;
+            background-color: #ddd;
+        }
+
+        .img-hint {
+            font-size: 14px;
+            color: #666;
+            background-color: #fff9e6;
+            padding: 8px;
+            border-left: 3px solid var(--apple-yellow);
+            text-align: left;
+            font-family: monospace, sans-serif;
+        }
+
+        /* 特定文本高亮与下划线 */
+        .highlight {
+            font-weight: bold;
+            color: #000;
+        }
+
+        .underline-text {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <!-- 顶部导航 -->
+    <div class="nav-bar">
+        <a href="desktop.html" class="back-btn">备忘录</a>
+        <div class="action-btn">⋯</div>
+    </div>
+
+    <!-- 备忘录内容区域 -->
+    <div class="notes-wrapper">
+
+        <!-- 第一篇：聊天记录备份 -->
+        <div class="note-card">
+            <div class="note-date">2024年12月6日 14:32</div>
+            <div class="note-content">
+                前几天把手机摔坏了😓<span class="underline-text">闺蜜</span>给我推了一个微信插件，下载后可以在本地备份聊天记录，以前部分丢失的也回来了，如果找不到记录的话，用上面的工具搜一下就可以了
+            </div>
+        </div>
+
+        <!-- 第二篇：私密空间 -->
+        <div class="note-card">
+            <div class="note-title">私密空间</div>
+            <div class="note-date">2025年04月06日 18:05</div>
+            <div class="note-content">
+                毕竟存了我从小到大吐苦水的内容，密码我设的难了一点，不过一打字就能知道解法了，以我的名字全文及生日的日期组成，哈哈，也不难嘛
+                
+                <!-- 键盘图片及提示区域 -->
+                <div class="image-container">
+                    <img src="keyboard.jpg" alt="键盘图片 (keyboard.jpg)" class="note-img" onerror="this.style.display='none';">
+                    <div class="img-hint">
+                        <strong>💡 提示词：</strong><br>
+                        y = 16<br>
+                        24 = f
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+                
+                <p style="margin-top: 10px;">
+                    <span style="color: var(--text-muted);">棒🎉</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- 第三篇：生活小妙招 -->
+        <div class="note-card">
+            <div class="note-title">生活小妙招</div>
+            <div class="note-date">2025年12月07日 09:15</div>
+            <div class="note-content">
+                从男朋友那里学来的，搜索一个重名多的人，可以尝试搜索 <span class="highlight">"名字+职业+地区"</span> 的方式。<br><br>
+                <span style="color: var(--text-muted);">例：李华 外科医生 江州市</span><br><br>
+                嘿嘿，管用 👍
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

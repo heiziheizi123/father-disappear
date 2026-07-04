@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>详细资料</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ededed; /* 微信标志性浅灰背景 */
+            color: #111111;
+            user-select: none;
+        }
+
+        /* 微信顶栏 */
+        .nav-bar {
+            height: 48px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+        }
+
+        /* 微信标准返回箭头 */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111111;
+            font-size: 16px;
+        }
+
+        .back-btn::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #111111;
+            border-bottom: 2px solid #111111;
+            transform: rotate(45deg);
+            margin-right: 6px;
+        }
+
+        /* 个人资料卡片区 */
+        .profile-card {
+            background-color: #ffffff;
+            padding: 24px 16px;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        /* 头像样式 */
+        .avatar-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            margin-right: 18px;
+            object-fit: cover;
+            display: block;
+            background-color: #cfcfcf;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .nickname {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .wx-id {
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-bottom: 4px;
+        }
+
+        .region {
+            font-size: 14px;
+            color: #7f7f7f;
+        }
+
+        /* 微信功能列表项 */
+        .info-list {
+            background-color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 14px 16px;
+            font-size: 16px;
+            border-bottom: 1px solid #f3f3f3;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            width: 80px;
+            color: #111111;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #7f7f7f;
+        }
+
+        /* 底部功能按钮区域（纯白底按钮） */
+        .btn-group {
+            margin-top: 12px;
+            background-color: #ffffff;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px 0;
+            background-color: #ffffff;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #576b95; /* 微信标准的文字蓝色 */
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* 按钮按下时的变灰反馈 */
+        .action-btn:active {
+            background-color: #e5e5e5;
+        }
+
+        /* 按钮内敛SVG图标样式 */
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 6px;
+            fill: #576b95;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-bar">
+        <a class="back-btn" href="add.html"></a>
+    </div>
+
+    <div class="profile-card">
+        <img src="weiguo.jpg" class="avatar-img" alt="张卫国头像">
+        <div class="profile-info">
+            <div class="nickname">张卫国</div>
+            <div class="wx-id">微信号: wxid_wg99812</div>
+            <div class="region">地区: 中国</div>
+        </div>
+    </div>
+
+    <div class="info-list">
+        <div class="info-item">
+            <div class="info-label">设置备注</div>
+            <div class="info-value"></div>
+        </div>
+    </div>
+
+    <div class="info-list">
+        <div class="info-item">
+            <div class="info-label">朋友圈</div>
+            <div class="info-value"></div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">更多信息</div>
+            <div class="info-value"></div>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button id="addContactBtn" class="action-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            添加到通讯录
+        </button>
+    </div>
+
+    <script>
+        // 点击“添加到通讯录”按钮
+        document.getElementById('addContactBtn').addEventListener('click', function() {
+            
+            // 1. 写入 localStorage
+            localStorage.setItem('hasAddedZhangWeiguo', 'true');
+            
+            // 2. 直接跳转回微信主页
+            window.location.href = '微信.html';
+        });
+    </script>
+</body>
+</html>

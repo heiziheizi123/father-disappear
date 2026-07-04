@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>搜索</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- 顶部微信搜索栏 --- */
+        .search-header {
+            background-color: #ededed;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            flex-shrink: 0;
+        }
+
+        .search-input-wrap {
+            flex: 1;
+            background-color: #ffffff;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            position: relative;
+        }
+
+        /* 微信放大镜图标 */
+        .search-icon {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #b2b2b2;
+            border-radius: 50%;
+            position: relative;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .search-icon::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 6px;
+            background-color: #b2b2b2;
+            transform: rotate(-45deg);
+            bottom: -4px;
+            right: -2px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #191919;
+            background: transparent;
+            width: 100%;
+        }
+        .search-input::placeholder {
+            color: #b2b2b2;
+        }
+
+        /* 清除输入按钮 */
+        .clear-btn {
+            width: 18px;
+            height: 18px;
+            background-color: #c3c3c3;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            display: none;
+            margin-left: 4px;
+            flex-shrink: 0;
+        }
+        .clear-btn::before, .clear-btn::after {
+            content: "";
+            position: absolute;
+            background-color: #ffffff;
+            width: 2px;
+            height: 10px;
+            top: 4px;
+            left: 8px;
+        }
+        .clear-btn::before { transform: rotate(45deg); }
+        .clear-btn::after { transform: rotate(-45deg); }
+
+        /* 取消按钮 */
+        .cancel-btn {
+            font-size: 16px;
+            color: #576b95;
+            padding-left: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        /* --- 默认展示区域（未输入时） --- */
+        .default-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .suggest-hint {
+            font-size: 14px;
+            color: #b2b2b2;
+            margin-bottom: 30px;
+        }
+
+        /* 微信九宫格分类搜索 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 80%;
+            max-width: 320px;
+            text-align: center;
+            row-gap: 24px;
+        }
+
+        .grid-item {
+            font-size: 15px;
+            color: #576b95;
+            cursor: pointer;
+            border-right: 1px solid #e1e1e1;
+        }
+        .grid-item:nth-child(3n) {
+            border-right: none;
+        }
+
+        /* --- 动态搜索结果面板（输入时显示） --- */
+        .search-results {
+            flex: 1;
+            background-color: #ffffff;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .result-section-title {
+            font-size: 13px;
+            color: #7f7f7f;
+            padding: 16px 16px 8px 16px;
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        /* 微信联系人样式栏 */
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #000000;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+        }
+        .result-item:active {
+            background-color: #f5f5f5;
+        }
+
+        .result-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background-color: #ededed;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .result-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .result-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #191919;
+            margin-bottom: 2px;
+        }
+
+        .result-meta {
+            font-size: 13px;
+            color: #7f7f7f;
+        }
+
+        /* 关键字高亮样式（微信绿） */
+        .highlight {
+            color: #07c160;
+        }
+
+        /* 无结果提示 */
+        .no-result {
+            text-align: center;
+            color: #b2b2b2;
+            font-size: 15px;
+            padding-top: 50px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="search-header">
+        <div class="search-input-wrap">
+            <div class="search-icon"></div>
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索" autocomplete="off" autofocus>
+            <div class="clear-btn" id="clearBtn"></div>
+        </div>
+        <a href="微信.html" class="cancel-btn">取消</a>
+    </div>
+
+    <div class="default-content" id="defaultContent">
+        <span class="suggest-hint">搜索指定内容</span>
+        <div class="grid-container">
+            <div class="grid-item">朋友圈</div>
+            <div class="grid-item">文章</div>
+            <div class="grid-item">公众号</div>
+            <div class="grid-item">小程序</div>
+            <div class="grid-item">音乐</div>
+            <div class="grid-item">表情</div>
+        </div>
+    </div>
+
+    <div class="search-results" id="searchResults">
+        <div class="result-section-title">联系人</div>
+        <div id="resultList">
+            </div>
+    </div>
+
+    <div class="no-result" id="noResult">最匹配的联系人或内容不存在</div>
+
+    <script>
+        // 严格匹配的数据库数据
+        const searchDatabase = [
+            {
+                names: ["闺蜜"], // 仅保留闺蜜词条
+                html: "guimi.html",
+                avatar: "闺蜜.jpg",
+                displayName: "闺蜜",
+                meta: "微信号: zhen_zhen99"
+            },
+            {
+                names: ["张卫国", "张", "卫国"], // 仅保留名字相关
+                html: "father.html",
+                avatar: "爸爸.jpg",
+                displayName: "张卫国",
+                meta: "来自通讯录：爸爸"
+            }
+        ];
+
+        const searchInput = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearBtn');
+        const defaultContent = document.getElementById('defaultContent');
+        const searchResults = document.getElementById('searchResults');
+        const resultList = document.getElementById('resultList');
+        const noResult = document.getElementById('noResult');
+
+        searchInput.addEventListener('input', function() {
+            const keyword = this.value.trim().toLowerCase();
+
+            if (keyword === '') {
+                clearBtn.style.display = 'none';
+                defaultContent.style.display = 'flex';
+                searchResults.style.display = 'none';
+                noResult.style.display = 'none';
+                return;
+            }
+
+            clearBtn.style.display = 'block';
+
+            // 根据精简后的names数组进行包含匹配
+            const filteredResults = searchDatabase.filter(item => {
+                return item.names.some(name => name.toLowerCase().includes(keyword));
+            });
+
+            renderResults(filteredResults, keyword);
+        });
+
+        function renderResults(results, keyword) {
+            resultList.innerHTML = '';
+            
+            if (results.length === 0) {
+                defaultContent.style.display = 'none';
+                searchResults.style.display = 'none';
+                noResult.style.display = 'block';
+                return;
+            }
+
+            noResult.style.display = 'none';
+            defaultContent.style.display = 'none';
+            searchResults.style.display = 'block';
+
+            results.forEach(item => {
+                // 如果输入的字存在于displayName中，则高亮
+                const regex = new RegExp(`(${keyword})`, 'gi');
+                const highlightedName = item.displayName.replace(regex, '<span class="highlight">$1</span>');
+
+                const a = document.createElement('a');
+                a.className = 'result-item';
+                a.href = item.html; 
+                a.innerHTML = `
+                    <img class="result-avatar" src="${item.avatar}" alt="${item.displayName}">
+                    <div class="result-info">
+                        <div class="result-name">${highlightedName}</div>
+                        <div class="result-meta">${item.meta}</div>
+                    </div>
+                `;
+                resultList.appendChild(a);
+            });
+        }
+
+        clearBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            this.style.display = 'none';
+            defaultContent.style.display = 'flex';
+            searchResults.style.display = 'none';
+            noResult.style.display = 'none';
+            searchInput.focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>外婆</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ededed;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- 顶部导航栏 --- */
+        .header {
+            background-color: #ededed;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            border-bottom: 1px solid #e1e1e1;
+            flex-shrink: 0;
+        }
+
+        .back-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-arrow {
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #181818;
+            border-bottom: 2px solid #181818;
+            transform: rotate(45deg);
+            margin-left: 4px;
+        }
+
+        .header .title {
+            font-size: 17px;
+            font-weight: 500;
+            margin-right: 14px;
+        }
+
+        /* --- 聊天内容区域 --- */
+        .chat-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .time-tag {
+            align-self: center;
+            background-color: #dadada;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .msg-row {
+            display: flex;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .msg-row.left {
+            justify-content: flex-start;
+        }
+
+        .msg-row.right {
+            flex-direction: row-reverse;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background-color: #ffffff;
+        }
+
+        .bubble {
+            max-width: 65%;
+            padding: 10px 12px;
+            font-size: 15px;
+            line-height: 1.4;
+            border-radius: 4px;
+            position: relative;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        /* 专门给图片消息用的气泡样式，去掉普通气泡的白底和边角 */
+        .bubble.pic-bubble {
+            background-color: transparent !important;
+            padding: 0;
+            max-width: 50%;
+        }
+        .bubble.pic-bubble::before {
+            display: none !important;
+        }
+        .chat-pic {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .left .bubble {
+            background-color: #ffffff;
+            margin-left: 10px;
+            color: #000000;
+        }
+
+        .left .bubble::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            left: -5px;
+            border-width: 6px 6px 6px 0;
+            border-style: solid;
+            border-color: transparent #ffffff transparent transparent;
+        }
+
+        .right .bubble {
+            background-color: #95ec69;
+            margin-right: 10px;
+            color: #000000;
+        }
+
+        .right .bubble::before {
+            content: "";
+            position: absolute;
+            top: 14px;
+            right: -5px;
+            border-width: 6px 0 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent transparent #95ec69;
+        }
+
+        /* --- 底部输入栏 --- */
+        .footer-bar {
+            height: 54px;
+            background-color: #f7f7f7;
+            border-top: 1px solid #e1e1e1;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .input-box {
+            flex: 1;
+            height: 36px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="header">
+        <a href="微信.html" class="back-btn">
+            <div class="back-arrow"></div>
+        </a>
+        <div class="title">外婆</div>
+        <div></div>
+    </div>
+
+    <!-- 聊天内容 -->
+    <div class="chat-container">
+        
+        <div class="time-tag">今天 上午 9:15</div>
+
+        <!-- 外婆（打错字，语音输入感） -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">乖女。啊，听你妈说你昨天做高铁，回来了，是不是？ 身体好吧？那个阿舅去给你修房门的锁了没有？</div>
+        </div>
+
+        <!-- 主角 -->
+        <div class="msg-row right">
+            <img class="avatar" src="主角.jpg" alt="我">
+            <div class="bubble">外婆，我是坐高铁回来的，我已经到家啦。阿舅说下午过来帮我修抽屉。</div>
+        </div>
+
+        <!-- 主角（主动询问） -->
+        <div class="msg-row right">
+            <img class="avatar" src="主角.jpg" alt="我">
+            <div class="bubble">外婆，我今天在旧抽屉里翻到了我亲生爸爸的名字，阿舅说他叫张卫国。您能跟我说说他吗？</div>
+        </div>
+
+        <div class="time-tag">今天 上午 10:30</div>
+
+        <!-- 外婆（态度转变：恨） -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">你提那个瘟神干什么！他就是个不争气的 没良心 没用的人 哼 连累你妈妈当年受了多少罪 没本事的男人最窝囊 提他我都嫌脏了嘴巴 呸</div>
+        </div>
+
+        <!-- 外婆发送图片 pic2.jpg -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble pic-bubble">
+                <img class="chat-pic" src="pic2.jpg" alt="旧照片/旧物件">
+            </div>
+        </div>
+
+        <!-- 外婆（语音发错字，情绪开始动摇） -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">这是当连你爸留下的一堆破铜烂铁的，还是什么东东，早就落灰了，看到就戳心，以前成天不务正业，钱也挣不到，整个家全靠你妈一个人撑着。气死我了。</div>
+        </div>
+
+        <!-- 主角 -->
+        <div class="msg-row right">
+            <img class="avatar" src="主角.jpg" alt="我">
+            <div class="bubble">原来这堆破玩意儿是他的……外婆，那他当年对我很凶吗？</div>
+        </div>
+
+        <div class="time-tag">今天 下午 1:20</div>
+
+        <!-- 外婆（态度转变：又觉得他人不坏，劝主角原谅） -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">那倒没有。唉！那个卫国脾气其实棉的很，软骨头一个 他那时候天天抱着你。就是自己口袋里没两个大钱</div>
+        </div>
+
+        <!-- 外婆 -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">其实想想。他心肠不坏，就是不是个过日子的料，离婚了也是解脱。乖女啊，毕竟他是你亲爹 身上流着他的血 以后要是他找过来、你也别太绝情。别太恨他了。</div>
+        </div>
+
+        <div class="time-tag">今天 下午 4:10</div>
+
+        <!-- 外婆（态度又变了，听到阿舅去修锁） -->
+      
+
+        <!-- 外婆 -->
+        <div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">那个张陈就是个讨债鬼。反正他现在也无依无靠的，没用的男人，提他干嘛，别惹你妈不高兴了啊。我去买菜了</div>
+        </div>
+<div class="msg-row left">
+            <img class="avatar" src="外婆.jpg" alt="婆">
+            <div class="bubble">来不来外婆家吃饭？</div>
+        </div>
+
+    </div>
+
+    <!-- 底部输入栏 -->
+    <div class="footer-bar">
+        <div class="input-box"></div>
+    </div>
+
+</body>
+</html>

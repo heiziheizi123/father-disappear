@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>凌夏的手机</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#dbeedb;
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+}
+/* 手机 */
+.phone{
+    width:390px;
+    height:844px;
+    border:3px dashed #7aa37a;
+    border-radius:40px;
+    overflow:hidden;
+    position:relative;
+    background:#fff;
+    box-shadow:0 0 20px rgba(0,0,0,.1);
+}
+/* 壁纸 */
+.wallpaper{
+    position:absolute;
+    inset:0;
+    background:url("background.jpg");
+    background-size:cover;
+    background-position:center;
+}
+/* 刘海 */
+.notch{
+    position:absolute;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+    width:140px;
+    height:28px;
+    background:#222;
+    border-radius:20px;
+    z-index:10;
+}
+/* 状态栏 */
+.status-bar{
+    position:relative;
+    z-index:5;
+    display:flex;
+    justify-content:space-between;
+    padding:18px 24px;
+    color:white;
+    font-size:14px;
+    text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+/* 软件区 */
+.apps{
+    position:relative;
+    z-index:5;
+    margin-top:90px;
+    padding:25px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px 18px;
+}
+.app{
+    text-decoration:none;
+    color:white;
+    text-align:center;
+}
+.app img{
+    width:72px;
+    height:72px;
+    object-fit:cover;
+    border-radius:18px;
+    border:2px dashed rgba(255,255,255,.9);
+    background:white;
+}
+.app-name{
+    margin-top:8px;
+    font-size:13px;
+    text-shadow:0 1px 3px rgba(0,0,0,.6);
+}
+/* Dock */
+.dock{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:20px;
+    height:90px;
+    border-radius:28px;
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(10px);
+    border:2px dashed rgba(255,255,255,.8);
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+    z-index:5;
+}
+.dock img{
+    width:60px;
+    height:60px;
+    border-radius:16px;
+    object-fit:cover;
+    border:2px dashed rgba(255,255,255,.8);
+}
+</style>
+</head>
+<body>
+<div class="phone">
+    <div class="wallpaper"></div>
+    <div class="notch"></div>
+    <div class="status-bar">
+        <span>21:07</span>
+        <span>📶 100%</span>
+    </div>
+    <div class="apps">
+        <a class="app" href="微信.html">
+            <img src="微信.jpg" alt="微信">
+            <div class="app-name">微信</div>
+        </a>
+        <a class="app" href="相册.html">
+            <img src="相册.jpg" alt="相册">
+            <div class="app-name">相册</div>
+        </a>
+        <a class="app" href="文件.html">
+            <img src="mimi.jpg" alt="文件">
+            <div class="app-name">私密空间</div>
+        </a>
+        <a class="app" href="dianhua.html">
+            <img src="dianhua.jpg" alt="电话">
+            <div class="app-name">电话</div>
+        </a>
+        <a class="app" href="浏览器.html">
+            <img src="浏览器.jpg" alt="浏览器">
+            <div class="app-name">浏览器</div>
+        </a>
+        <a class="app" href="备忘录.html">
+            <img src="备忘录.jpg" alt="备忘录">
+            <div class="app-name">备忘录</div>
+        </a>
+    </div>
+    <div class="dock">
+        <a href="微信.html">
+            <img src="微信.jpg" alt="微信">
+        </a>
+        <a href="相册.html">
+            <img src="相册.jpg" alt="相册">
+        </a>
+        <a href="mimi.html">
+            <img src="mimi.jpg" alt="文件">
+        </a>
+        <a href="dianhua.html">
+            <img src="dianhua.jpg" alt="通讯录">
+        </a>
+    </div>
+</div>
+</body>
+</html>

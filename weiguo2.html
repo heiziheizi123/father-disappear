@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>详细资料</title>
+    <style>
+        /* 基础重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ededed; /* 微信标志性浅灰背景 */
+            color: #111111;
+            user-select: none;
+        }
+
+        /* 微信顶栏 */
+        .nav-bar {
+            height: 48px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+            border-bottom: 1px solid #f3f3f3;
+        }
+
+        /* 微信标准返回箭头 */
+        .back-btn {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #111111;
+            font-size: 16px;
+        }
+
+        .back-btn::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #111111;
+            border-bottom: 2px solid #111111;
+            transform: rotate(45deg);
+            margin-right: 6px;
+        }
+
+        /* 个人资料卡片区 */
+        .profile-card {
+            background-color: #ffffff;
+            padding: 24px 16px;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        /* 头像样式 */
+        .avatar-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            margin-right: 18px;
+            object-fit: cover;
+            display: block;
+            background-color: #cfcfcf;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .nickname {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .wx-id {
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-bottom: 4px;
+        }
+
+        .region {
+            font-size: 14px;
+            color: #7f7f7f;
+        }
+
+        /* 微信常规资料栏目 */
+        .info-list {
+            background-color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 14px 16px;
+            font-size: 16px;
+            border-bottom: 1px solid #f3f3f3;
+            align-items: flex-start;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            width: 80px;
+            color: #111111;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #7f7f7f;
+            word-break: break-all;
+        }
+
+        /* 电话号码高亮样式（仿微信可点击拨打效果） */
+        .phone-number {
+            color: #576b95; 
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        /* 底部发消息按钮（纯白底蓝色字） */
+        .btn-group {
+            margin-top: 12px;
+            background-color: #ffffff;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px 0;
+            background-color: #ffffff;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #576b95; /* 微信标准的文字蓝色 */
+            cursor: pointer;
+            text-decoration: none;
+            outline: none;
+        }
+
+        /* 按钮按下时的变灰反馈 */
+        .action-btn:active {
+            background-color: #e5e5e5;
+        }
+
+        /* 按钮内敛SVG图标样式 */
+        .btn-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            fill: #576b95;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶栏返回键，指向聊天页 -->
+    <div class="nav-bar">
+        <a class="back-btn" href="weiguochat.html"></a>
+    </div>
+
+    <!-- 个人基础信息区 -->
+    <div class="profile-card">
+        <!-- 头像路径保持一致 -->
+        <img src="weiguo.jpg" class="avatar-img" alt="张卫国头像">
+        <div class="profile-info">
+            <div class="nickname">张卫国</div>
+            <div class="wx-id">微信号: wxid_wg99812</div>
+            <div class="region">地区: 中国</div>
+        </div>
+    </div>
+
+    <!-- 电话号码与个性签名资料栏 -->
+    <div class="info-list">
+        <div class="info-item">
+            <div class="info-label">电话号码</div>
+            <!-- 为你编了一个符合国内号码特征、但通常为虚拟/空号段的解密电话 -->
+            <div class="info-value">
+                <a href="tel:13900998812" class="phone-number">139 0099 8812</a>
+            </div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">个性签名</div>
+            <!-- 烘托剧情：暗示他被债务逼入绝路 -->
+            <div class="info-value" style="color: #fa5151;">别再打电话催了！要钱没有，命有一条！</div>
+        </div>
+    </div>
+
+    <div class="info-list">
+        <div class="info-item">
+            <div class="info-label">朋友圈</div>
+            <div class="info-value">［已被作者设置为不可见］</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">更多信息</div>
+            <div class="info-value">对方开启了账号保护，限制查看更多资料</div>
+        </div>
+    </div>
+
+    <!-- 底部返回聊天的白底按钮 -->
+    <div class="btn-group">
+        <a href="weiguochat.html" class="action-btn">
+            <!-- 微信标准的发消息气泡图标 -->
+            <svg class="btn-icon" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+            发消息
+        </a>
+    </div>
+
+</body>
+</html>

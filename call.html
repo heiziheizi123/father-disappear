@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>正在通话</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #1a1a1a; /* 拟真手机通话的深红/黑夜背景 */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            width: 100vw;
+            padding: 60px 30px calc(40px + env(safe-area-inset-bottom)) 30px;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* 顶部联系人信息栏 */
+        .contact-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .phone-num {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .call-status {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 300;
+            height: 20px;
+        }
+
+        /* 中部通话功能矩阵（静音、键盘、免提等纯视觉图标） */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            width: 100%;
+            max-width: 280px;
+            margin-bottom: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .feature-icon-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .feature-item:active .feature-icon-circle {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .feature-icon {
+            width: 26px;
+            height: 26px;
+            fill: #ffffff;
+        }
+
+        .feature-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* 底部红色挂断按钮区 */
+        .hangup-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hangup-btn {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background-color: #ff3b30; /* 标志性挂断红 */
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
+        }
+
+        .hangup-btn:active {
+            background-color: #d62f26;
+        }
+
+        .hangup-icon {
+            width: 32px;
+            height: 32px;
+            fill: #ffffff;
+            transform: rotate(135deg); /* 将拨号键图标旋转为挂断形态 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部号码及状态 -->
+    <div class="contact-info">
+        <div id="targetNum" class="phone-num">正在呼叫...</div>
+        <div id="statusText" class="call-status">正在呼叫...</div>
+    </div>
+
+    <!-- 中间九宫格功能键（仿iOS/Android通话UI） -->
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-icon-circle"><svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.42 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg></div>
+            <span class="feature-label">静音</span>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon-circle"><svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 14c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-7-5c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 14c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm14-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 14c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0-7c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/></svg></div>
+            <span class="feature-label">键盘</span>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon-circle"><svg class="feature-icon" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg></div>
+            <span class="feature-label">免提</span>
+        </div>
+    </div>
+
+    <!-- 底部挂断 -->
+    <div class="hangup-container">
+        <button class="hangup-btn" onclick="hangUp()">
+            <svg class="hangup-icon" viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z"/></svg>
+        </button>
+    </div>
+
+    <!-- 音频载入 -->
+    <audio id="voice1" src="voice1.mp3" preload="auto"></audio>
+    <audio id="voice2" src="voice2.mp3" preload="auto"></audio>
+    <audio id="voice3" src="voice3.mp3" preload="auto"></audio>
+    <audio id="voice4" src="voice4.mp3" preload="auto"></audio>
+
+    <script>
+        const targetNumDisplay = document.getElementById('targetNum');
+        const statusText = document.getElementById('statusText');
+        let activeAudio = null;
+        let timerInterval = null;
+
+        // 格式化输出手机号，让UI更真实 (例: 139 1300 4822)
+        function formatNumber(num) {
+            if (num.length === 11 && num.startsWith('1')) {
+                return num.replace(/(\d{3})(\d{4})(\d{4})/, '$1 $2 $3');
+            }
+            return num;
+        }
+
+        // 挂断电话返回拨号盘
+        function hangUp() {
+            if (activeAudio) {
+                activeAudio.pause();
+                activeAudio.currentTime = 0;
+            }
+            if (timerInterval) clearInterval(timerInterval);
+            window.location.href = 'dianhua.html';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // 1. 获取 URL 中传过来的号码参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const num = urlParams.get('num') || "";
+            
+            targetNumDisplay.textContent = formatNumber(num);
+
+            // 2. 根据规则筛选分配对应的音频资源
+            if (num === "13991877437") {
+                activeAudio = document.getElementById('voice2');
+            } else if (num === "13913004822") {
+                activeAudio = document.getElementById('voice1');
+            } else if (num === "13900998812") {
+                activeAudio = document.getElementById('voice3');
+            } else if (num !== "") {
+                activeAudio = document.getElementById('voice4');
+            }
+
+            // 3. 拟真延迟模拟：嘟嘟两秒后，接通并播放音频
+            if (activeAudio) {
+                setTimeout(() => {
+                    statusText.textContent = "00:00";
+                    activeAudio.play().catch(e => {
+                        statusText.textContent = "点击屏幕以接通";
+                        // 防止部分浏览器拦截自动播放
+                        document.body.addEventListener('click', () => { activeAudio.play(); }, {once: true});
+                    });
+
+                    // 4. 通话计时器
+                    let seconds = 0;
+                    timerInterval = setInterval(() => {
+                        seconds++;
+                        let mins = Math.floor(seconds / 60).toString().padStart(2, '0');
+                        let secs = (seconds % 60).toString().padStart(2, '0');
+                        statusText.textContent = `${mins}:${secs}`;
+                    }, 1000);
+
+                    // 音频播放完毕自动挂断
+                    activeAudio.onended = function() {
+                        hangUp();
+                    };
+
+                }, 1800); // 1.8秒呼叫等待音延迟
+            } else {
+                statusText.textContent = "空号";
+            }
+        });
+    </script>
+</body>
+</html>

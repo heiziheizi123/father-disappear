@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>相册</title>
+    <style>
+        /* 苹果原生系统UI样式复位 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            padding-bottom: 60px;
+        }
+
+        /* 苹果大标题导航栏 */
+        .ios-header {
+            padding: 40px 20px 10px 20px;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 0.5px solid #e5e5ea;
+        }
+        .ios-header h1 {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* 分区标题 */
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            padding: 25px 20px 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-title .see-all {
+            color: #007aff;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        /* 横向滚动布局（精选推荐 & 最近项目） */
+        .scroller {
+            display: flex;
+            overflow-x: auto;
+            padding: 0 20px;
+            gap: 15px;
+            scroll-snap-type: x mandatory;
+        }
+        .scroller::-webkit-scrollbar {
+            display: none; /* 隐藏滚动条，保持苹果极简风 */
+        }
+
+        /* 苹果相册卡片样式 */
+        .album-card {
+            flex: 0 0 145px;
+            scroll-snap-align: start;
+            cursor: pointer;
+        }
+        .album-card.large {
+            flex: 0 0 220px; /* 特别突出核心相册 */
+        }
+        .cover-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* 1:1 正方形 */
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #f2f2f7;
+            margin-bottom: 7px;
+        }
+        .cover-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .album-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #000000;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .album-count {
+            font-size: 13px;
+            color: #8e8e93;
+            margin-top: 2px;
+        }
+
+        /* 干扰项：列表媒体类型样式 */
+        .ios-list {
+            margin: 0 20px;
+            border-top: 0.5px solid #e5e5ea;
+        }
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 0.5px solid #e5e5ea;
+            cursor: pointer;
+        }
+        .list-item-left {
+            display: flex;
+            align-items: center;
+            font-size: 17px;
+            color: #007aff; /* 苹果蓝 */
+        }
+        .list-item-left .icon {
+            margin-right: 12px;
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+        .list-item-left .text {
+            color: #000000;
+        }
+        .list-item-right {
+            display: flex;
+            align-items: center;
+            color: #8e8e93;
+            font-size: 17px;
+        }
+        .list-item-right::after {
+            content: "〉";
+            font-size: 14px;
+            color: #c7c7cc;
+            margin-left: 7px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ios-header">
+        <h1>相册</h1>
+    </div>
+
+    <div class="section-title">
+        <span>我的相册</span>
+        <span class="see-all" onclick="triggerAlert()">查看全部</span>
+    </div>
+    <div class="scroller">
+        <div class="album-card large" onclick="triggerAlert()">
+            <div class="cover-wrapper">
+                <img src="fengmian12.jpg" alt="夏日旅行" onerror="this.src='https://via.placeholder.com/220?text=fengmian2'">
+            </div>
+            <div class="album-name">夏日旅行</div>
+            <div class="album-count">144</div>
+        </div>
+        <div class="album-card large" onclick="triggerAlert()">
+            <div class="cover-wrapper">
+                <img src="fengmian13.jpg" alt="冬日暖暖" onerror="this.src='https://via.placeholder.com/220?text=fengmian3'">
+            </div>
+            <div class="album-name">冬日暖暖</div>
+            <div class="album-count">72</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>精选推荐</span>
+        <span class="see-all">编辑</span>
+    </div>
+    <div class="scroller">
+        <div class="album-card" onclick="triggerAlert()">
+            <div class="cover-wrapper">
+                <img src="fengmian11.jpg" alt="最近项目" onerror="this.src='https://via.placeholder.com/150?text=fengmian11'">
+            </div>
+            <div class="album-name">最近项目</div>
+            <div class="album-count">14</div>
+        </div>
+
+        <div class="album-card" onclick="location.href='album2.html'">
+            <div class="cover-wrapper">
+                <img src="fengmian2.jpg" alt="关于张卫国" onerror="this.src='https://via.placeholder.com/150?text=fengmian2'">
+            </div>
+            <div class="album-name">关于张卫国</div>
+            <div class="album-count">2</div>
+        </div>
+
+        <div class="album-card" onclick="location.href='album3.html'">
+            <div class="cover-wrapper">
+                <img src="fengmian3.jpg" alt="推荐项目" onerror="this.src='https://via.placeholder.com/150?text=fengmian3'">
+            </div>
+            <div class="album-name">推荐项目</div>
+            <div class="album-count">3</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>最近项目</span>
+        <span class="see-all" onclick="triggerAlert()">显示全部</span>
+    </div>
+    <div class="scroller">
+        <div class="album-card" onclick="triggerAlert()">
+            <div class="cover-wrapper">
+                <img src="fengmian3.jpg" alt="未命名项目" onerror="this.src='https://via.placeholder.com/150?text=fengmian3'">
+            </div>
+            <div class="album-name">未命名项目</div>
+            <div class="album-count">105</div>
+        </div>
+        <div class="album-card" onclick="triggerAlert()">
+            <div class="cover-wrapper">
+                <img src="fengmian21.jpg" alt="最近删除" onerror="this.src='https://via.placeholder.com/150?text=fengmian11'">
+            </div>
+            <div class="album-name">最近删除缓存</div>
+            <div class="album-count">42</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>媒体类型</span>
+    </div>
+    <div class="ios-list">
+        <div class="list-item" onclick="triggerAlert()">
+            <div class="list-item-left"><span class="icon">📷</span><span class="text">视频</span></div>
+            <div class="list-item-right">12</div>
+        </div>
+        <div class="list-item" onclick="triggerAlert()">
+            <div class="list-item-left"><span class="icon">👤</span><span class="text">自拍</span></div>
+            <div class="list-item-right">85</div>
+        </div>
+        <div class="list-item" onclick="triggerAlert()">
+            <div class="list-item-left"><span class="icon">📱</span><span class="text">屏幕截图</span></div>
+            <div class="list-item-right">204</div>
+        </div>
+        <div class="list-item" onclick="triggerAlert()">
+            <div class="list-item-left"><span class="icon">❤️</span><span class="text">个人收藏</span></div>
+            <div class="list-item-right">31</div>
+        </div>
+    </div>
+
+    <script>
+        // 统一的干扰项与无效操作弹窗逻辑
+        function triggerAlert() {
+            alert("提示：此内容和解密无关。");
+        }
+    </script>
+</body>
+</html>

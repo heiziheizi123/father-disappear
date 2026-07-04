@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>“记忆孤岛”综合科普 - 临床心理学文献库</title>
+    <style>
+        /* 全局现代医学文献风格样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f6f8fa;
+            margin: 0;
+            padding: 0;
+            color: #24292f;
+            line-height: 1.7;
+        }
+
+        /* 顶部导航 */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #d0d7de;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-btn {
+            font-size: 20px;
+            color: #57606a;
+            text-decoration: none;
+            margin-right: 14px;
+        }
+        .nav-title {
+            font-size: 14px;
+            color: #57606a;
+            font-weight: 500;
+        }
+
+        /* 页面主容器 */
+        .main-container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 20px 16px 40px 16px;
+        }
+
+        /* 文献卡片主体 */
+        .document-card {
+            background-color: #ffffff;
+            border: 1px solid #d0d7de;
+            border-radius: 12px;
+            padding: 24px 20px;
+            box-shadow: 0 2px 8px rgba(140, 148, 159, 0.08);
+        }
+
+        /* 标题与元数据 */
+        .doc-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0969da;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+        .doc-meta {
+            font-size: 12px;
+            color: #57606a;
+            border-bottom: 1px solid #d0d7de;
+            padding-bottom: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* 章节大标题 */
+        .section-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #24292f;
+            margin: 28px 0 14px 0;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #afb8c1;
+        }
+
+        /* 引言与核心结论框 */
+        .blockquote-box {
+            background-color: #f6f8fa;
+            border-left: 4px solid #0969da;
+            padding: 12px 16px;
+            margin: 16px 0;
+            font-size: 14px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* 列表排版 */
+        .info-list {
+            padding-left: 20px;
+            margin: 12px 0;
+        }
+        .info-list li {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #24292f;
+        }
+        .info-list strong {
+            color: #1f2328;
+        }
+
+        /* 核心要求：最重要的部分采用黑色下划线，不改变颜色 */
+        .important-line {
+            text-decoration: underline;
+            text-decoration-color: #24292f;
+            text-underline-offset: 3px;
+        }
+
+        /* 响应式表格设计 */
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 16px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+            min-width: 500px;
+        }
+        .compare-table th {
+            background-color: #f6f8fa;
+            color: #24292f;
+            font-weight: 600;
+            padding: 10px 12px;
+            border-bottom: 1px solid #d0d7de;
+            border-right: 1px solid #d0d7de;
+        }
+        .compare-table td {
+            padding: 12px;
+            border-bottom: 1px solid #d0d7de;
+            border-right: 1px solid #d0d7de;
+            color: #24292f;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+        .compare-table th:last-child, .compare-table td:last-child {
+            border-right: none;
+        }
+
+        /* 手机端间距优化 */
+        @media (max-width: 480px) {
+            .document-card { padding: 16px 12px; }
+            .doc-title { font-size: 19px; }
+            .section-title { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-header">
+        <a href="浏览器.html" class="back-btn">←</a>
+        <div class="nav-title">文献检索系统 > 临床心理学分册</div>
+    </div>
+
+    <div class="main-container">
+        <div class="document-card">
+            
+            <h1 class="doc-title">“记忆孤岛”综合科普框架</h1>
+            <div class="doc-meta">
+                分类标签：非病态适应性解离 ｜ 审核：临床心理学研究中心 ｜ 更新：2026-06-23
+            </div>
+
+            <div class="section-title">一、什么是“记忆孤岛”？——一种非病态的解离性存储</div>
+            <p style="font-size: 15px; margin: 0 0 12px 0;">它不是遗忘，而是记忆编码异常。<span class="important-line">本质是高情绪唤醒压制了海马体整合功能，导致记忆以“感官碎片”形式孤立存储</span>。具备以下四大核心临床特征：</p>
+            
+            <ul class="info-list">
+                <li>
+                    <strong>叙事断连：</strong><span class="important-line">缺乏时间与因果上下文，无法嵌入人生时间轴</span>。记忆主体往往只记得某个孤立的视觉画面，却完全想不起这发生在自己几岁。
+                </li>
+                <li>
+                    <strong>高唤醒低整合：</strong>突发事件发生时，由于大脑的<span class="important-line">杏仁核过度激活，导致背景信息（时间、地点）未成功编码</span>进入长期叙事记忆中。
+                </li>
+                <li>
+                    <strong>线索依赖型提取：</strong>在日常生活中处于蛰伏状态，<span class="important-line">仅被特定感官线索（气味、声音）被动触发</span>；且内容高度固化，每次回放如老照片般没有丝毫改变。
+                </li>
+                <li>
+                    <strong>防御性隔间化：</strong>这属于大脑的一种轻微解离表现，在情感层面上，个体回忆起该片段时，会觉得<span class="important-line">“像发生在别人身上”</span>，缺乏主观真实感。
+                </li>
+            </ul>
+
+            <div class="blockquote-box">
+                <strong>核心结论：</strong>提取该记忆时前额叶处于在线状态，<span class="important-line">个体能清晰辨识“这是回忆”，属于大脑的适应性自我保护机制，不构成疾病诊断标准</span>。
+            </div>
+
+            <div class="section-title">二、与“PTSD闪回”的 5 个关键分界线</div>
+            
+            <div class="table-wrapper">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%;">维度</th>
+                            <th style="width: 40%;">记忆孤岛</th>
+                            <th style="width: 40%;">PTSD（创伤后应激障碍）闪回</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>触发机制</strong></td>
+                            <td><span class="important-line">线索依赖型</span>（必须由特定气味或声音精准激活）</td>
+                            <td><span class="important-line">泛化唤醒型</span>（疲劳、情绪低落即可自发激活，触发物常失真）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>现实检验</strong></td>
+                            <td><span class="important-line">保持在线</span>（清晰知道“这是过去”，有时空距离感）</td>
+                            <td><span class="important-line">暂时离线</span>（认为“此刻正在发生”，<span class="important-line">完全覆盖当前现实</span>）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>生理卷入</strong></td>
+                            <td>躯体基本保持平静，或仅伴随轻度情绪波动</td>
+                            <td>伴随严重躯体应激反应，<span class="important-line">伴随心率飙升、大量出汗、身体僵住</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>内容动态</strong></td>
+                            <td><span class="important-line">高度固化</span>（像单帧定格老照片，每次回放高度一致）</td>
+                            <td><span class="important-line">碎片化且变异</span>（不同感官模态混乱切换，峰值处常有空白缺口）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>神经影像</strong></td>
+                            <td><span class="important-line">激活左侧海马体（尝试调取但失败），杏仁核部分受抑</span></td>
+                            <td><span class="important-line">海马体离线，杏仁核与脑岛过载</span>，同时<span class="important-line">布罗卡区（语言中枢）受抑</span>——因此发作时无法完整表述现状</td>
+                        </tr>
+                        <tr>
+                            <td><strong>临床定性</strong></td>
+                            <td>属于适应性解离，<span class="important-line">不构成任何精神障碍诊断</span></td>
+                            <td>属于 DSM-5 中 PTSD 核心 B 类症状，<span class="important-line">必须接受临床医学干预</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

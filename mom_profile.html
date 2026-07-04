@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>详细资料</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- 顶部导航栏 --- */
+        .header {
+            background-color: #f7f7f7;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+        }
+
+        .back-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+        }
+
+        .back-arrow {
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid #181818;
+            border-bottom: 2px solid #181818;
+            transform: rotate(45deg);
+            margin-left: 4px;
+        }
+
+        /* --- 个人信息头部 --- */
+        .profile-card {
+            background-color: #ffffff;
+            padding: 24px 16px;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .big-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 6px;
+            object-fit: cover;
+            margin-right: 20px;
+            flex-shrink: 0;
+            background-color: #ededed;
+        }
+
+        .info-block {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .display-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: #191919;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .wechat-id {
+            font-size: 14px;
+            color: #7f7f7f;
+            margin-bottom: 2px;
+        }
+
+        .region {
+            font-size: 14px;
+            color: #7f7f7f;
+        }
+
+        /* --- 资料细项列表 --- */
+        .info-list {
+            background-color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 16px;
+            font-size: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-label {
+            width: 80px;
+            color: #191919;
+            flex-shrink: 0;
+        }
+
+        /* 电话号码高亮显示（高仿真微信蓝） */
+        .item-value {
+            color: #576b95; 
+            font-weight: 500;
+        }
+
+        /* --- 底部发消息按钮 --- */
+        .btn-container {
+            margin-top: 12px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .msg-btn {
+            display: block;
+            padding: 16px;
+            color: #576b95;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .msg-btn:active {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部导航 -->
+    <div class="header">
+        <!-- 点击返回妈妈的聊天记录页面 mom.html -->
+        <a href="mom.html" class="back-btn">
+            <div class="back-arrow"></div>
+        </a>
+        <div></div>
+    </div>
+
+    <!-- 个人基本信息区块 -->
+    <div class="profile-card">
+        <img class="big-avatar" src="妈妈.jpg" alt="头像">
+        <div class="info-block">
+            <span class="display-name">妈妈</span>
+            <span class="wechat-id">微信号：wxid_m0m77812</span>
+            <span class="region">地区：江州市 直水县</span>
+        </div>
+    </div>
+
+    <!-- 详细资料区块（电话号码线索处） -->
+    <div class="info-list">
+        <div class="info-item">
+            <span class="item-label">电话号码</span>
+            <!-- 这里的号码可以作为后续 search.html 或者解密网页输入的重要凭证 -->
+            <span class="item-value">139-1300-4822</span>
+        </div>
+    </div>
+
+    <!-- 底部功能栏 -->
+    <div class="btn-container">
+        <a href="mom.html" class="msg-btn">发消息</a>
+    </div>
+
+</body>
+</html>

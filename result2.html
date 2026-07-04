@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>如何查找一个人的信息？ - 搜索结果</title>
+    <style>
+        /* 全局样式：模拟手机端浏览器搜索结果页 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #222;
+        }
+
+        /* 顶部模拟浏览器搜索栏 */
+        .header-bar {
+            background-color: #fff;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .back-icon {
+            font-size: 20px;
+            margin-right: 15px;
+            color: #666;
+            text-decoration: none;
+        }
+        .dummy-search-box {
+            flex: 1;
+            background-color: #f1f3f4;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* 结果列表容器 */
+        .results-container {
+            padding: 12px;
+        }
+
+        /* 基础搜索卡片样式 */
+        .result-item {
+            position: relative;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            user-select: none; 
+        }
+
+        /* ==== 核心：第一条【曾浏览过】的特殊交互样式 ==== */
+        .result-item.visited-track {
+            background-color: #eef2f9; 
+            border-left: 4px solid #1a73e8; 
+            cursor: pointer;
+            user-select: auto;
+            transition: background-color 0.2s;
+        }
+        .result-item.visited-track:active {
+            background-color: #e2e9f5; 
+        }
+
+        /* 右上角“曾浏览过”标签 */
+        .top-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #334155; 
+            color: #fff;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        /* 搜索标题样式 */
+        .title-clickbaity {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1a0dab; 
+            line-height: 1.4;
+            margin: 0 0 6px 0;
+            padding-right: 65px; 
+        }
+        .visited-track .title-clickbaity {
+            color: #0b1a75;
+        }
+
+        /* 摘要文字 */
+        .snippet {
+            font-size: 13px;
+            color: #4f4f4f;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* 底部来源信息 */
+        .meta-info {
+            font-size: 11px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* 纯静态干扰项的暗淡样式 */
+        .distractor {
+            opacity: 0.85;
+        }
+        .distractor .title-clickbaity {
+            color: #333 !important; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 顶部模拟浏览器搜索栏 -->
+    <div class="header-bar">
+        <a href="浏览器.html" class="back-icon">←</a>
+        <div class="dummy-search-box">如何查找一个人的信息？</div>
+    </div>
+
+    <!-- 搜索结果列表 -->
+    <div class="results-container">
+
+        <!-- 【第一条：曾浏览过，唯一可互动项】 -->
+        <div class="result-item visited-track" id="interactiveResult">
+            <!-- 右上角标签 -->
+            <span class="top-badge">曾浏览过</span>
+            
+            <h2 class="title-clickbaity">
+                怎么去寻找一个失去联系很久的朋友？教你几招高效寻人技巧
+            </h2>
+            <div class="snippet">
+                想联系上许久未见的人，可以按照下面这条由易到难的路径来尝试：1. 社交平台与公开信息搜索。这是最高效、最常用的方法：· 多平台交叉搜索：在微信、QQ、微博、抖音、LinkedIn 等平台，输入朋友的姓名、昵称、可能的手机号/QQ号进行查找。
+            </div>
+            <div class="meta-info">
+                生活百科指南 · 8.2万次阅读 · 1周前
+            </div>
+        </div>
+
+        <!-- 【以下全是干扰项，无法点击】 -->
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">法律途径与寻人公告：如何在合规范围内寻找失联多年的亲属？</h2>
+            <div class="snippet">
+                因特殊原因引发的家庭成员失联，在尝试过常规社会化工具寻找无果后，可以考虑通过公安机关的失踪人口申报或依法通过官方报刊发布正式登报寻人启事。需要注意的是，这要求提供直系亲属证明……
+            </div>
+            <div class="meta-info">法务互助网 · 3.1万阅读</div>
+        </div>
+
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">互联网大数据时代的隐私边界：公开搜索引擎中能查到哪些个人痕迹</h2>
+            <div class="snippet">
+                通过特定关键字组合如（姓名+学校/企业+地区）在传统网页搜索引擎中检索，往往可以捕捉到被索引的公开喜报、校友名册、论文发表、赛事获奖公示等。但随着数据安全法的实施，公开可查信息已大幅……
+            </div>
+            <div class="meta-info">科技前沿评论 · 核心期刊</div>
+        </div>
+
+        <div class="result-item distractor">
+            <h2 class="title-clickbaity">【互助】有人用过那些寻人公益网站吗？来说说靠谱的寻亲平台推荐</h2>
+            <div class="snippet">
+                如果你要找的是失散多年的战友、老同学或者灾后失联人员，可以尝试去正规的公益寻人平台（如宝贝回家、红十字会寻人服务等）登记备案。这些平台拥有庞大的志愿者网络，通常不收取任何费用。
+            </div>
+            <div class="meta-info">天涯互助板块 · 论坛帖</div>
+        </div>
+
+    </div>
+
+    <script>
+        // 点击第一条可互动项的事件
+        document.getElementById('interactiveResult').addEventListener('click', function() {
+            // 跳转到具体对应的详情页 result2_detail.html
+            window.location.href = 'result2_detail.html'; 
+        });
+    </script>
+</body>
+</html>

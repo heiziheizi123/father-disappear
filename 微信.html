@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>微信</title>
+    <style>
+        /* --- 补全的基础与全局重置样式 --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #ededed;
+            color: #111111;
+            user-select: none;
+        }
+
+        /* --- 补全顶栏基础样式 --- */
+        .header {
+            height: 48px;
+            background-color: #ededed;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .header .title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 17px;
+            font-weight: 600;
+            color: #181818;
+        }
+
+        /* 纯CSS代码绘制加号图标 */
+        .add-icon-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .add-icon {
+            position: relative;
+            width: 18px;
+            height: 18px;
+        }
+
+        .add-icon::before, .add-icon::after {
+            content: "";
+            position: absolute;
+            background-color: #181818;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .add-icon::before {
+            width: 18px;
+            height: 2px;
+        }
+
+        .add-icon::after {
+            width: 2px;
+            height: 18px;
+        }
+
+        /* --- 搜索栏 --- */
+        .search-container {
+            padding: 8px 12px;
+            background-color: #ededed;
+            flex-shrink: 0;
+        }
+
+        .search-bar {
+            background-color: #ffffff;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b2b2b2;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* CSS 放大镜图标 */
+        .search-icon {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #b2b2b2;
+            border-radius: 50%;
+            position: relative;
+            margin-right: 6px;
+            transform: rotate(-45deg);
+        }
+
+        .search-icon::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 6px;
+            background-color: #b2b2b2;
+            top: 10px;
+            left: 4px;
+        }
+
+        /* --- 聊天列表区域 --- */
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+            background-color: #ffffff;
+        }
+
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .chat-item:active {
+            background-color: #f5f5f5;
+        }
+
+        /* 用于控制动态生成的张卫国聊天框 */
+        #zhangWeiguoChat {
+            display: none; /* 默认由JS控制是否展开 */
+        }
+
+        /* 红色提示语特殊类 */
+        .danger-msg {
+            color: #fa5151 !important; /* 微信标准红色警告色 */
+            font-weight: 500;
+        }
+
+        /* 线索人物头像（JPG） */
+        .avatar-img {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+
+        /* 干扰项群聊头像（Emoji仿真群头像） */
+        .avatar-emoji {
+            width: 48px;
+            height: 48px;
+            border-radius: 4px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            background-color: #e3e3e3;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            font-size: 18px;
+            line-height: 1;
+            overflow: hidden;
+        }
+
+        .chat-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .chat-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .chat-name {
+            font-size: 16px;
+            color: #191919;
+            font-weight: 400;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-time {
+            font-size: 12px;
+            color: #b2b2b2;
+        }
+
+        .chat-meta {
+            font-size: 13px;
+            color: #999999;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 免打扰图标 (纯CSS) */
+        .mute-icon {
+            width: 12px;
+            height: 12px;
+            position: relative;
+            background: #b2b2b2;
+            border-radius: 2px 0 0 2px;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+        .mute-icon::after {
+            content: "";
+            position: absolute;
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent #b2b2b2 transparent transparent;
+            left: -6px;
+            top: -3px;
+        }
+
+        /* --- 底部导航栏 --- */
+        .footer {
+            height: 54px;
+            background-color: #f7f7f7;
+            border-top: 1px solid #e1e1e1;
+            display: flex;
+            padding-bottom: env(safe-area-inset-bottom);
+            flex-shrink: 0;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #999999;
+            text-decoration: none;
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            color: #07c160;
+        }
+
+        /* 底部微信图标 (纯CSS) */
+        .icon-wechat {
+            width: 22px;
+            height: 18px;
+            background-color: currentColor;
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div></div> 
+        <div class="title">微信</div>
+        <a href="add.html" class="add-icon-btn">
+            <div class="add-icon"></div>
+        </a>
+    </div>
+
+    <div class="search-container">
+        <a href="search.html" class="search-bar">
+            <div class="search-icon"></div>
+            <span>搜索</span>
+        </a>
+    </div>
+
+    <div class="chat-list">
+
+        <a href="weiguochat.html" id="zhangWeiguoChat" class="chat-item">
+            <img class="avatar-img" src="weiguo.jpg" alt="张卫国">
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">张卫国</span>
+                    <span class="chat-time" id="chatTime">下午 2:01</span>
+                </div>
+                <div class="chat-meta danger-msg">我们可以开始聊天了</div>
+            </div>
+        </a>
+
+        <div class="chat-item">
+            <div class="avatar-emoji" style="font-size: 24px;">📣</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">订阅号消息</span>
+                    <span class="chat-time">下午 5:12</span>
+                </div>
+                <div class="chat-meta">看客inSight：那些在深夜被隐藏的城市秘密</div>
+            </div>
+        </div>
+
+        <div class="chat-item">
+            <div class="avatar-emoji">💄💅💄</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">A正品美妆护肤海外代购2群</span>
+                    <span class="chat-time">下午 4:55</span>
+                </div>
+                <div class="chat-meta">美妆福利官-婷婷：姐妹们，斩男色口红最后三支特价...</div>
+            </div>
+            <div class="mute-icon"></div>
+        </div>
+        
+        <a href="mom.html" class="chat-item">
+            <img class="avatar-img" src="妈妈.jpg" alt="妈妈">
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">妈妈</span>
+                    <span class="chat-time">下午 3:45</span>
+                </div>
+                <div class="chat-meta">你在哪儿呢？看见了回电话。</div>
+            </div>
+        </a>
+
+        <div class="chat-item">
+            <div class="avatar-emoji" style="font-size: 24px;">💻</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">文件传输助手</span>
+                    <span class="chat-time">下午 3:10</span>
+                </div>
+                <div class="chat-meta">[文件] 2026年度工作总结报告.pdf</div>
+            </div>
+        </div>
+
+        <div class="chat-item">
+            <div class="avatar-emoji">📊👔📈</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">项目复盘与紧急推进群</span>
+                    <span class="chat-time">下午 2:30</span>
+                </div>
+                <div class="chat-meta">张经理：@所有人 下周一的方案大家都准备好了吗？</div>
+            </div>
+            <div class="mute-icon"></div>
+        </div>
+
+        <a href="boyfriend.html" class="chat-item">
+            <img class="avatar-img" src="男友.jpg" alt="男友">
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">男友</span>
+                    <span class="chat-time">下午 2:10</span>
+                </div>
+                <div class="chat-meta">[图片]</div>
+            </div>
+        </a>
+
+        <div class="chat-item">
+            <div class="avatar-emoji">🍔🍕🍟</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">今天中午吃什么天天领红包群</span>
+                    <span class="chat-time">中午 12:00</span>
+                </div>
+                <div class="chat-meta">大牌外卖满减官：[链接] 快来领今天的30元无门槛大额券！</div>
+            </div>
+            <div class="mute-icon"></div>
+        </div>
+
+        <a href="uncle.html" class="chat-item">
+            <img class="avatar-img" src="阿舅.jpg" alt="阿舅">
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">阿舅</span>
+                    <span class="chat-time">昨天</span>
+                </div>
+                <div class="chat-meta">照片的事先别在你妈面前提了。…</div>
+            </div>
+        </a>
+
+        <div class="chat-item">
+            <div class="avatar-emoji" style="font-size: 24px;">📦</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">菜鸟驿站</span>
+                    <span class="chat-time">昨天</span>
+                </div>
+                <div class="chat-meta">您的包裹已暂存至丰巢快递柜，请及时取件。</div>
+            </div>
+        </div>
+
+        <div class="chat-item">
+            <div class="avatar-emoji">👟👜👗</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">天天特价原单尾货清仓群</span>
+                    <span class="chat-time">昨天</span>
+                </div>
+                <div class="chat-meta">群主-小微：最后几件，工厂直销倒计时！</div>
+            </div>
+            <div class="mute-icon"></div>
+        </div>
+
+        <a href="grandma.html" class="chat-item">
+            <img class="avatar-img" src="外婆.jpg" alt="外婆">
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">外婆</span>
+                    <span class="chat-time">今天</span>
+                </div>
+                <div class="chat-meta">来不来吃晚饭？</div>
+            </div>
+        </a>
+
+        <div class="chat-item">
+            <div class="avatar-emoji">🏡👨‍👩‍👧‍👦👵</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">相亲相爱一家人</span>
+                    <span class="chat-time">前天</span>
+                </div>
+                <div class="chat-meta">大姨：[链接] 每天喝这个竟然能延年益寿！</div>
+            </div>
+            <div class="mute-icon"></div>
+        </div>
+
+        <div class="chat-item">
+            <div class="avatar-emoji" style="font-size: 24px;">💳</div>
+            <div class="chat-info">
+                <div class="chat-top">
+                    <span class="chat-name">招商银行信用卡</span>
+                    <span class="chat-time">3天前</span>
+                </div>
+                <div class="chat-meta">账户提醒：您尾号8812的账户成功消费15.00元。</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <a href="#" class="nav-item active">
+            <div class="icon-wechat"></div>
+            <span>微信</span>
+        </a>
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            // 读取 localStorage 里记录的添加状态
+            const hasAdded = localStorage.getItem('hasAddedZhangWeiguo');
+            
+            if (hasAdded === 'true') {
+                // 如果已添加，将隐藏的张卫国联系人展出
+                document.getElementById('zhangWeiguoChat').style.display = 'flex';
+                
+                // 自动刷新时间为添加时的当前微信样式时间（例如：下午 2:01）
+                const now = new Date();
+                let hours = now.getHours();
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const ampm = hours >= 12 ? '下午 ' : '上午 ';
+                if (hours > 12) hours -= 12;
+                document.getElementById('chatTime').textContent = ampm + hours + ':' + minutes;
+            }
+        });
+    </script>
+</body>
+</html>

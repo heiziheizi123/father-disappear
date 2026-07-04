@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>私密空间</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;
+}
+
+body{
+
+    background:#F7FAF3;
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#4A5A44;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:420px;
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    padding:42px 28px;
+
+    box-shadow:
+        0 12px 40px rgba(115,135,93,.08);
+
+}
+
+.logo{
+
+    width:82px;
+
+    height:82px;
+
+    border-radius:50%;
+
+    background:#DCECCF;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:auto;
+
+    font-size:38px;
+
+}
+
+.title{
+
+    margin-top:22px;
+
+    text-align:center;
+
+    font-size:27px;
+
+    font-weight:600;
+
+    color:#4A5A44;
+
+}
+
+.subtitle{
+
+    margin-top:8px;
+
+    text-align:center;
+
+    color:#8A9B7F;
+
+    font-size:15px;
+
+}
+
+input{
+
+    margin-top:34px;
+
+    width:100%;
+
+    height:50px;
+
+    border:2px solid #E3ECD8;
+
+    border-radius:14px;
+
+    background:#FCFDFB;
+
+    padding:0 18px;
+
+    font-size:16px;
+
+    transition:.25s;
+
+    outline:none;
+
+}
+
+input:focus{
+
+    border-color:#C8DEB2;
+
+    background:#fff;
+
+}
+
+.tip{
+
+    margin-top:14px;
+
+    text-align:center;
+
+    color:#8EA080;
+
+    font-size:14px;
+
+}
+
+button{
+
+    margin-top:34px;
+
+    width:100%;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#CFE6BE;
+
+    color:#4A5A44;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    transition:.2s;
+
+}
+
+button:active{
+
+    background:#BDD8A8;
+
+    transform:scale(.98);
+
+}
+
+#error{
+
+    margin-top:18px;
+
+    color:#D46363;
+
+    text-align:center;
+
+    display:none;
+
+    font-size:14px;
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">🔒</div>
+
+    <div class="title">
+        私密空间
+    </div>
+
+    <div class="subtitle">
+        请输入访问密码
+    </div>
+
+    <input
+        id="pwd"
+        type="password"
+        placeholder="请输入密码">
+
+    <div class="tip">
+        提示：名字+生日日期加密？
+    </div>
+
+    <button onclick="login()">
+        解锁
+    </button>
+
+    <div id="error">
+        密码错误
+    </div>
+
+</div>
+
+<script>
+
+const PASSWORD="29182625321821wd";
+
+function login(){
+
+    const value=document.getElementById("pwd").value;
+
+    if(value===PASSWORD){
+
+        window.location.href="secret.html";
+
+    }else{
+
+        document.getElementById("error").style.display="block";
+
+    }
+
+}
+
+document.getElementById("pwd").addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        login();
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
